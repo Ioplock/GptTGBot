@@ -26,8 +26,9 @@ async def main():
 
 async def set_commands(bot: Bot):
     commands = [
-        BotCommand(command="/start", description="Start the bot"),
-        BotCommand(command="/help", description="Help information"),
+        BotCommand(command="/start", description="Start the bot."),
+        BotCommand(command="/settings", description="Settings of the bot."),
+        BotCommand(command="/admin", description="Admin panel."),
     ]
     await bot.set_my_commands(commands)
 
