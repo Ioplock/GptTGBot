@@ -1,6 +1,7 @@
-from sqlalchemy import Boolean, Column, Integer, String, ForeignKey, Table
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, ForeignKey, Table
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy import create_engine
+import datetime
 from bot.config import DATABASE_URL
 
 Base = declarative_base()
@@ -70,6 +71,14 @@ class UserSettings(Base):
     model = relationship('Model')
     endpoint = relationship('APIEndpoint')
     token = relationship('AccessToken')
+
+class PromtHistory(Base):
+    __tablename__ = 'promt_history'
+    history_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
+    input_text = Column(String, nullable=False)
+    response = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.datetime.now(datetime.timezone.utc))
 
 async def create_db_and_tables():
     Base.metadata.create_all(bind=engine)

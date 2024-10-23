@@ -13,7 +13,7 @@ async def main():
     bot = Bot(token=API_TOKEN)
     dp = Dispatcher(storage=MemoryStorage())
 
-    dp.include_router(user.router)
+    # dp.include_router(user.router)
     dp.include_router(admin.router)
 
     await set_commands(bot)
